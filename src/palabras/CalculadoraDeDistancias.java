@@ -1,3 +1,5 @@
+package palabras;
+
 
 public class CalculadoraDeDistancias {
 
@@ -24,7 +26,7 @@ public class CalculadoraDeDistancias {
                 if (palabra1.charAt(i - 1) != palabra2.charAt(j - 1)) {
                     costoSubstitucion += 1; // Si los caracteres no coinciden, coste de sustitución es 1
                 }
-                
+
                 // Calcular el coste mínimo entre las tres operaciones posibles
                 distancia[i][j] = Math.min(distancia[i - 1][j] + 1, // Eliminación
                                            Math.min(distancia[i][j - 1] + 1, // Inserción
@@ -36,13 +38,23 @@ public class CalculadoraDeDistancias {
         return distancia[longitud1][longitud2];
     }
 
-    // Ejemplo de uso
+    // Método main que toma las palabras como argumentos de la línea de comandos
     public static void main(String[] args) {
-        CalculadoraDeDistancias calculadora = new CalculadoraDeDistancias();
-        String palabra1 = "graf";
-        String palabra2 = "graft";
+        // Verificar si se proporcionaron exactamente dos argumentos
+        if (args.length != 2) {
+            System.out.println("Por favor, proporciona exactamente dos palabras como argumentos.");
+            return; // Salir del método si no se proporcionaron exactamente dos palabras
+        }
 
+        // Obtener las palabras de los argumentos
+        String palabra1 = args[0];
+        String palabra2 = args[1];
+
+        // Crear una instancia de la calculadora de distancias y calcular la distancia
+        CalculadoraDeDistancias calculadora = new CalculadoraDeDistancias();
         int distancia = calculadora.calcularDistanciaDeEdicion(palabra1, palabra2);
+
+        // Mostrar el resultado
         System.out.println("La distancia de edición entre '" + palabra1 + "' y '" + palabra2 + "' es: " + distancia);
     }
 }
